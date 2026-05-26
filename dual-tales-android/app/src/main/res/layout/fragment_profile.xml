@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 1. 상단 헤더 -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="프로필"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="18sp"
+                    android:textColor="#1A1A1A" />
+            </FrameLayout>
+
+            <!-- 2. 프로필 카드 (세로 배치) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_profile_card"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <!-- 2-1. 프로필 이미지 (상단 중앙) -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_profile_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_nav_profile"
+                        android:background="@drawable/bg_profile_image"
+                        android:scaleType="centerCrop" />
+
+
+                </FrameLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
+
+                <!-- 2-2. 텍스트+뱃지 영역 (이미지 아래, 중앙 정렬) -->
+                <LinearLayout
+                    android:layout_width="211dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- 닉네임 -->
+                    <TextView
+                        android:id="@+id/tv_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아기똥"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:textSize="20sp"
+                        android:lineSpacingExtra="8sp"
+                        android:letterSpacing="-0.05"
+                        android:textColor="#1A1A1A"
+                        android:gravity="center"
+                        android:includeFontPadding="false" />
+
+                    <!-- 이메일 -->
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="이메일@naver.com"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4sp"
+                        android:letterSpacing="-0.03"
+                        android:textColor="#6D6D6D"
+                        android:gravity="center"
+                        android:includeFontPadding="false" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp" />
+
+                    <!-- 통계 뱃지 행 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_made_books"
+                            android:layout_width="wrap_content"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_stat_badge"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="만든 동화 책 6권"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:textSize="14sp"
+                            android:letterSpacing="-0.03"
+                            android:textColor="#4B4B4B"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false" />
+
+                        <Space
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tv_read_books"
+                            android:layout_width="wrap_content"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_stat_badge"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="읽은 책 12권"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:textSize="14sp"
+                            android:letterSpacing="-0.03"
+                            android:textColor="#4B4B4B"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 3. 회원정보 수정 버튼 -->
+            <LinearLayout
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_edit_profile"
+                    android:scaleType="fitCenter" />
+
+                <Space
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원정보 수정"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textSize="14sp"
+                    android:textColor="#848484" />
+
+            </LinearLayout>
+
+            <!-- 4. 구분선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F5F5F5" />
+
+            <!-- 5. 언어 설정 변경하기 -->
+            <LinearLayout
+                android:id="@+id/ll_language_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="18dp"
+                android:paddingBottom="18dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="언어 설정 변경하기"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#1A1A1A" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:rotation="180"
+                    app:tint="#C2C2C2"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+            <!-- 6. 구분선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F5F5F5" />
+
+            <!-- 7. 앱 설정 -->
+            <LinearLayout
+                android:id="@+id/ll_app_settings"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="앱 설정"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#1A1A1A" />
+
+            </LinearLayout>
+
+            <!-- 8. 구분선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F5F5F5" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

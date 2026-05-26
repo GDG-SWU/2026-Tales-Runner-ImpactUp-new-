@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 배경 이미지 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_login_bg"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:clipChildren="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipChildren="false">
+
+            <!-- 헤더 (height 56dp) -->
+            <LinearLayout
+                android:id="@+id/ll_header"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="DualTales 로고"
+                    android:src="@drawable/ic_logo" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ic_notification"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="알림"
+                    android:src="@drawable/ic_notification" />
+
+            </LinearLayout>
+
+            <!-- 인사말 -->
+            <!-- TODO: 닉네임을 서버에서 받아와서 SpannableString으로 #C383E1 색 적용 -->
+            <TextView
+                android:id="@+id/tv_greeting"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:letterSpacing="-0.05"
+                android:lineHeight="28sp"
+                android:text="지예 님 안녕하세요.\n오늘은 어떤 동화를 읽어볼까요?"
+                android:textColor="#1A1A1A"
+                android:textSize="20sp" />
+
+            <!-- ViewPager2 피처드 카드 (중앙 307×323dp, ScalePageTransformer) -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager_featured"
+                android:layout_width="match_parent"
+                android:layout_height="323dp"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                android:paddingStart="43dp"
+                android:paddingEnd="43dp" />
+
+            <!-- 그리드 책 목록: 행 아이템(163dp) + marginBottom(49dp) 단위로 동적 addView -->
+            <!-- 전체 높이 기준: 3행 × 163dp + 2 × 49dp gap = 587dp ≈ 589dp (Figma) -->
+            <LinearLayout
+                android:id="@+id/ll_book_grid"
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="80dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

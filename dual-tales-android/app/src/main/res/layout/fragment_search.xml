@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <FrameLayout
+        android:id="@+id/fl_search_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="401dp"
+            android:src="@drawable/img_search_bg"
+            android:scaleType="centerCrop"
+            android:contentDescription="@null" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_search_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="141dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:letterSpacing="-0.05"
+                android:lineHeight="28sp"
+                android:text="나와 같은 언어를 탭해\n다른 사람들이 만든 동화책을 찾아보세요!"
+                android:textColor="#1A1A1A"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/ll_language_buttons"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_lang_english"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="3dp"
+                    android:outlineProvider="background"
+                    android:background="@drawable/bg_language_chip"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:letterSpacing="-0.03"
+                    android:stateListAnimator="@null"
+                    android:text="영어"
+                    android:textAllCaps="false"
+                    android:textColor="#1A1A1A"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_lang_french"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:elevation="3dp"
+                    android:outlineProvider="background"
+                    android:background="@drawable/bg_language_chip"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:letterSpacing="-0.03"
+                    android:stateListAnimator="@null"
+                    android:text="프랑스어"
+                    android:textAllCaps="false"
+                    android:textColor="#1A1A1A"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_lang_korean"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:elevation="3dp"
+                    android:outlineProvider="background"
+                    android:background="@drawable/bg_language_chip"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:letterSpacing="-0.03"
+                    android:stateListAnimator="@null"
+                    android:text="한국어"
+                    android:textAllCaps="false"
+                    android:textColor="#1A1A1A"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_search_bar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="14dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_language_buttons"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:hint="언어를 검색해 다른 동화책을 찾아보세요!"
+                    android:inputType="text"
+                    android:letterSpacing="-0.03"
+                    android:singleLine="true"
+                    android:textColorHint="#848484"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_search_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="#4B4B4B" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_results"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/fl_search_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

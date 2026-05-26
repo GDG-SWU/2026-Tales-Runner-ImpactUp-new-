@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_bookshelf">
+
+    <fragment
+        android:id="@+id/nav_bookshelf"
+        android:name="com.example.dualtales.ui.screens.BookshelfFragment"
+        android:label="내 책장"
+        tools:layout="@layout/fragment_bookshelf" />
+
+    <fragment
+        android:id="@+id/nav_create"
+        android:name="com.example.dualtales.ui.screens.CreateFragment"
+        android:label="만들기"
+        tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.dualtales.ui.screens.SearchFragment"
+        android:label="검색"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.dualtales.ui.screens.ProfileFragment"
+        android:label="프로필"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

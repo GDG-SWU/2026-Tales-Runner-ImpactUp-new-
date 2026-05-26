@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- ======= 상단 툴바 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            android:tint="#000000"
+            android:scaleType="fitCenter"
+            android:contentDescription="뒤로 가기" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동화 만들기"
+            android:textColor="#1A1A1A"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="20sp"
+            android:lineSpacingExtra="8sp"
+            android:letterSpacing="-0.05"
+            android:layout_marginStart="20dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 스텝 인디케이터 (프로그래밍 방식으로 채움) ======= -->
+    <LinearLayout
+        android:id="@+id/ll_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="121dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="19dp" />
+
+    <!-- ======= 질문 카드 (배경/텍스트는 Intent extra로 설정) ======= -->
+    <LinearLayout
+        android:id="@+id/ll_question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="170dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="18dp">
+
+        <TextView
+            android:id="@+id/tv_question_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="질문 1"
+            android:textColor="@color/main_purple"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="14sp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#151515"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="18sp"
+            android:lineSpacingExtra="4sp"
+            android:letterSpacing="-0.03"
+            android:gravity="center"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 음성 입력 카드 ======= -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_voice_card"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp"
+        android:paddingStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_question"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_language_switch"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="18dp">
+
+        <!-- 4-1. 타이핑 텍스트 -->
+        <TextView
+            android:id="@+id/tv_voice_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="타이핑 되는 것 ... 블라블라라라라..."
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="18sp"
+            android:lineSpacingExtra="4sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#C383E1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 4-2. 마이크 버튼 -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/btn_mic_toggle"
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:src="@drawable/img_voice_listening"
+            android:background="@drawable/bg_mic_button"
+            android:scaleType="centerInside"
+            android:padding="29dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="음성 입력 토글"
+            app:layout_constraintTop_toBottomOf="@id/tv_voice_text"
+            app:layout_constraintBottom_toTopOf="@id/btn_voice_complete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
+
+        <!-- 상태 텍스트 -->
+        <TextView
+            android:id="@+id/tv_voice_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="한국어로 듣는 중"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp"
+            android:textColor="#C383E1"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/btn_mic_toggle"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 4-3. 완료 버튼 -->
+        <TextView
+            android:id="@+id/btn_voice_complete"
+            android:layout_width="231dp"
+            android:layout_height="36dp"
+            android:text="음성입력 완료"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#C383E1"
+            android:gravity="center"
+            android:background="@drawable/bg_voice_complete_btn"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ======= 언어 변경 버튼 ======= -->
+    <LinearLayout
+        android:id="@+id/btn_language_switch"
+        android:layout_width="142dp"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/bg_language_switch_btn"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_current_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="한국어"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#1A1A1A" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_language_switch"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

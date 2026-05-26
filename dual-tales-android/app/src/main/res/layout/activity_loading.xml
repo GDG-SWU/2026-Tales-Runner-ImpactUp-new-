@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- ======= 로딩 중 상태 ======= -->
+
+    <!-- 캐릭터 영상 -->
+    <VideoView
+        android:id="@+id/vv_loading"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_title"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="동화책을 만들고 있어요"
+        android:textAlignment="center"
+        android:textColor="#151515"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vv_loading"
+        app:layout_constraintBottom_toTopOf="@id/tv_subtitle" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="조금만 기다려주세요"
+        android:textAlignment="center"
+        android:textColor="#C383E1"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- ======= 완료 상태: 아이콘 위 + 텍스트 아래, 화면 중앙 배치 ======= -->
+    <!-- onLoadingComplete() 에서 visibility VISIBLE로 전환 -->
+    <LinearLayout
+        android:id="@+id/ll_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_read"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_check_complete"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_check_complete"
+            android:contentDescription="완성" />
+
+        <TextView
+            android:id="@+id/tv_complete_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="동화책이 완성되었어요!"
+            android:textAlignment="center"
+            android:textColor="#1A1A1A"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!-- ======= 하단 버튼 (항상 고정) ======= -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_read"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_button_gray"
+        android:enabled="false"
+        android:fontFamily="@font/pretendard_semibold"
+        android:letterSpacing="-0.03"
+        android:stateListAnimator="@null"
+        android:text="바로 읽어보기"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

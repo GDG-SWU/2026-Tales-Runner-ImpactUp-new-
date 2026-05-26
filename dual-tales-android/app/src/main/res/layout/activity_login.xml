@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ======= 배경 이미지 ======= -->
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/img_login_bg"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/img_login_star_bg"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ======= 타이틀 영역 (top: 160dp, left: 44dp, width: 307dp) ======= -->
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="듀얼 테일즈에 오신 걸 환영합니다"
+            android:fontFamily="@font/pretendard_bold"
+            android:textColor="#1A1A1A"
+            android:textSize="24sp"
+            android:lineSpacingExtra="2sp"
+            android:letterSpacing="-0.04"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="간편한 소셜 로그인으로 바로 시작해보세요."
+            android:textColor="#4B4B4B"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4sp"
+            android:letterSpacing="-0.03"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 입력폼 영역 (top: 278dp, left: 18dp, width: 357dp) ======= -->
+    <LinearLayout
+        android:id="@+id/ll_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="278dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp">
+
+        <!-- 이메일 그룹 (label-input gap: 16dp) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="49dp"
+                android:layout_height="40dp"
+                android:text="이메일"
+                android:textColor="#1A1A1A"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4sp"
+                android:letterSpacing="-0.03"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="이메일을 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="16sp"
+                android:letterSpacing="-0.03" />
+
+        </LinearLayout>
+
+        <!-- 비밀번호 그룹 (group-gap: 40dp, label-input gap: 8dp) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호"
+                android:textColor="#1A1A1A"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4sp"
+                android:letterSpacing="-0.03"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="비밀번호를 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:inputType="textPassword"
+                android:fontFamily="@font/pretendard_medium"
+                android:textSize="16sp"
+                android:letterSpacing="-0.03" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ======= 로그인 버튼 (form 하단에서 gap: 40dp) ======= -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="로그인"
+        android:background="@drawable/bg_button_black"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textSize="18sp"
+        android:letterSpacing="-0.03"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:stateListAnimator="@null"
+        app:layout_constraintTop_toBottomOf="@id/ll_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp" />
+
+    <!-- ======= 하단 링크 영역 (버튼 바로 아래, width: 357dp, height: 36dp) ======= -->
+
+    <!-- ======= 하단 홍보 문구 영역 (top: 703dp, left: 31dp, width: 324dp, height: 84dp) ======= -->
+    <!-- 하단 홍보 문구/링크 영역 -->
+    <LinearLayout
+        android:id="@+id/ll_links"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp">
+
+        <!-- 회원가입 (width: 141dp, padding: 20/8/20/8) -->
+        <LinearLayout
+            android:id="@+id/ll_signup"
+            android:layout_width="141dp"
+            android:layout_height="36dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/tv_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03125"
+                android:text="회원가입"
+                android:textColor="#848484"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- 구분선 (간격: 10dp) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="|"
+            android:textColor="#848484"
+            android:textSize="16sp" />
+
+        <!-- 아이디/비번찾기 (width: 140dp, padding: 16/8/16/8) -->
+        <LinearLayout
+            android:id="@+id/ll_find_account"
+            android:layout_width="140dp"
+            android:layout_height="36dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/tv_find_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03125"
+                android:text="아이디/비번찾기"
+                android:textColor="#848484"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom_promo"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp">
+
+        <TextView
+            android:id="@+id/tv_bottom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이와 부모가"
+            android:textColor="#FFB44B"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="20sp"
+            android:letterSpacing="-0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bottom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:letterSpacing="-0.05"
+            android:text="함께 만드는 동화 언어공부!"
+            android:textColor="#FFB44B"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="357dp"
+    android:layout_height="163dp"
+    android:orientation="vertical">
+
+    <!-- 책 표지 2개 가로 배치: width 307dp, height 149dp, left 25dp, gap 21dp -->
+    <LinearLayout
+        android:layout_width="307dp"
+        android:layout_height="149dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp">
+
+        <!-- 책 카드 1: 143x149dp, radius 10dp -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_book1"
+            android:layout_width="143dp"
+            android:layout_height="149dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="#747474"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/iv_book1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@null" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- gap 21dp -->
+        <Space
+            android:layout_width="21dp"
+            android:layout_height="match_parent" />
+
+        <!-- 책 카드 2: 143x149dp, radius 10dp -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_book2"
+            android:layout_width="143dp"
+            android:layout_height="149dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="#747474"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/iv_book2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@null" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- 흰색 선반 바: width 357dp, height 14dp, radius 8dp -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="357dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="0dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF" />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

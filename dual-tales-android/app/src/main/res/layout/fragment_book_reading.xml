@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F0FF">
+
+    <!-- ======= 상단 툴바 ======= -->
+    <!-- 좌(나가기) : 중앙(제목) : 우(설정) = weight 1:2:1 로 제목 완전 중앙 정렬 -->
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="나가기"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="16sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#1A1A1A"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="책 제목은공백포함12자..."
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="16sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#1A1A1A"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tv_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="설정"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="16sp"
+            android:letterSpacing="-0.03"
+            android:textColor="#1A1A1A"
+            android:gravity="end" />
+
+    </LinearLayout>
+
+    <!-- ======= 메인 이미지 영역 (CardView: cornerRadius 8dp) ======= -->
+    <!-- 333dp x 387dp, marginTop 128dp, 좌우 대칭 (393dp 기준 각 30dp) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_book_image"
+        android:layout_width="333dp"
+        android:layout_height="387dp"
+        android:layout_marginTop="128dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_book_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@null" />
+
+            <!-- 페이지 인디케이터: 우측 상단 반투명 블랙 배경 -->
+            <TextView
+                android:id="@+id/tv_page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 / 20"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="13sp"
+                android:letterSpacing="-0.03"
+                android:background="#80000000"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- ======= 텍스트 박스 영역 (CardView: cornerRadius 22dp) ======= -->
+    <!-- 333dp x 174dp, marginTop 527dp (이미지 하단 515dp + 12dp 갭) -->
+    <!-- 폰트: sans-serif = Android 시스템 Noto Sans (한국어 자동 적용) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_text_box"
+        android:layout_width="333dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="527dp"
+        app:cardCornerRadius="22dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_book_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:lineHeight="30sp"
+            android:letterSpacing="-0.0625"
+            android:gravity="center"
+            android:textColor="#1A1A1A" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- ======= 하단 네비게이션 ======= -->
+    <!-- 336dp x 50dp, marginTop 735dp, 이전/다음 space-between -->
+    <LinearLayout
+        android:id="@+id/ll_bottom_nav"
+        android:layout_width="336dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="735dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 이전 버튼: 68dp x 50dp, #EBDEF1, radius 10dp -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_prev"
+            android:layout_width="68dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_nav_button"
+            android:fontFamily="@font/pretendard_bold"
+            android:letterSpacing="-0.03"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:stateListAnimator="@null"
+            android:text="이전"
+            android:textAllCaps="false"
+            android:textColor="#C383E1"
+            android:textSize="16sp" />
+
+        <!-- 중앙 공백 (space-between) -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <!-- 다음 버튼: 68dp x 50dp, #EBDEF1, radius 10dp -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="68dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_nav_button"
+            android:fontFamily="@font/pretendard_bold"
+            android:letterSpacing="-0.03"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:stateListAnimator="@null"
+            android:text="다음"
+            android:textAllCaps="false"
+            android:textColor="#C383E1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

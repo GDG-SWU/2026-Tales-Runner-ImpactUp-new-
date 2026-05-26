@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- 툴바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:letterSpacing="-0.04"
+            android:lineHeight="28sp"
+            android:text="읽기 설정"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F5F5F5" />
+
+    <!-- 글자 크기 변경 -->
+    <LinearLayout
+        android:id="@+id/ll_font_size"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_item_divider"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pretendard_medium"
+            android:letterSpacing="-0.03"
+            android:lineHeight="18sp"
+            android:text="글자 크기 변경"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_font_size_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="16pt"
+                android:textColor="#C2C2C2"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="10dp"
+                android:scaleX="-1"
+                android:src="@drawable/ic_back"
+                app:tint="#C2C2C2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 슬라이드로 넘기기 -->
+    <LinearLayout
+        android:id="@+id/ll_slide_mode"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_item_divider"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pretendard_medium"
+            android:letterSpacing="-0.03"
+            android:lineHeight="18sp"
+            android:text="슬라이드로 넘기기"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_slide_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:thumbTint="#FFFFFF"
+            app:trackTint="@color/sw_track_selector" />
+
+    </LinearLayout>
+
+    <!-- 다크모드 -->
+    <LinearLayout
+        android:id="@+id/ll_dark_mode"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pretendard_medium"
+            android:letterSpacing="-0.03"
+            android:lineHeight="18sp"
+            android:text="다크모드"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:thumbTint="#FFFFFF"
+            app:trackTint="@color/sw_track_selector" />
+
+    </LinearLayout>
+
+    <!-- 나머지 영역 채우기 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5" />
+
+</LinearLayout>

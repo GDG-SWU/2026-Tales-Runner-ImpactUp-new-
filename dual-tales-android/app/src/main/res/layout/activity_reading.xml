@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ======= 읽기 화면 콘텐츠 ======= -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        android:orientation="vertical">
+
+        <!-- 툴바 -->
+
+        <!-- 일러스트 영역 -->
+        <LinearLayout
+            android:id="@+id/ll_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="18dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/tv_exit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="start"
+                android:letterSpacing="-0.03"
+                android:text="나가기"
+                android:textColor="#848484"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_book_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="center"
+                android:letterSpacing="-0.04"
+                android:maxLines="1"
+                android:text="책 제목은공백포함12자..."
+                android:textColor="#2F2F2F"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="end"
+                android:letterSpacing="-0.03"
+                android:text="설정"
+                android:textColor="#848484"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="30dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_illustration"
+                android:layout_width="match_parent"
+                android:layout_height="387dp"
+                android:background="@color/gray02"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedImage8" />
+
+            <!-- 페이지 뱃지 -->
+            <LinearLayout
+                android:id="@+id/ll_page_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_page_badge"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/tv_page_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="1 / 20"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- 텍스트 카드 영역 -->
+        <FrameLayout
+            android:id="@+id/fl_text_card_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp">
+
+            <!-- 앞면: 한국어 (흰 배경) -->
+            <LinearLayout
+                android:id="@+id/ll_text_card_front"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/bg_text_card"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_story_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:letterSpacing="-0.04"
+                    android:lineSpacingExtra="14sp"
+                    android:text="옛날에,\n아무도 신지 않는 파란 신발이 있었어요.\n그 신발은 밤이 되면\n몰래 숨을 쉬었어요.\n&quot;후우—&quot; 하고요."
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- 뒷면: 제2언어 (검정 배경) -->
+            <LinearLayout
+                android:id="@+id/ll_text_card_back"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/bg_text_card_dark"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_story_text_translated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:letterSpacing="-0.04"
+                    android:lineSpacingExtra="14sp"
+                    android:text="Ngày xửa ngày xưa,\ncó một chiếc giày màu xanh mà không ai đi.\nĐêm buông xuống,\nchiếc giày ấy lặng lẽ thở.\n&quot;Phù—&quot; như thế."
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- 버튼을 하단으로 밀어내는 spacer -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- 이전/다음 버튼 영역 -->
+        <LinearLayout
+            android:id="@+id/ll_nav_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="29dp"
+            android:paddingEnd="29dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_nav_button"
+                android:fontFamily="@font/pretendard_bold"
+                android:letterSpacing="-0.03"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:stateListAnimator="@null"
+                android:text="이전"
+                android:textAllCaps="false"
+                android:textColor="#C383E1"
+                android:textSize="16sp"
+                app:backgroundTint="@null" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_nav_button"
+                android:fontFamily="@font/pretendard_bold"
+                android:letterSpacing="-0.03"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:stateListAnimator="@null"
+                android:text="다음"
+                android:textAllCaps="false"
+                android:textColor="#C383E1"
+                android:textSize="16sp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ======= 가이드 오버레이 (최상단, 최초 진입 시에만 표시) ======= -->
+    <!-- visibility는 ReadingActivity에서 SharedPreferences 확인 후 VISIBLE로 전환 -->
+    <FrameLayout
+        android:id="@+id/guide_overlay_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <!-- Canvas + PorterDuff.CLEAR로 이미지 영역만 뚫린 반투명 오버레이 -->
+        <com.example.dualtales.SpotlightOverlayView
+            android:id="@+id/spotlight_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- 가이드 안내 콘텐츠 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 타이틀: "듀얼테일즈로 동화 읽기" -->
+            <TextView
+                android:id="@+id/tv_guide_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="180dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="듀얼테일즈로 동화 읽기"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 가이드 캐릭터 이미지 -->
+            <ImageView
+                android:id="@+id/iv_guide_character"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_guide_character"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_guide_title" />
+
+            <!-- 터치 안내 텍스트 -->
+            <TextView
+                android:id="@+id/tv_guide_touch_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="터치하면 다른 언어로 바뀌어요"
+                android:textColor="#C383E1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_guide_character" />
+
+            <!-- 아래 방향 화살표 -->
+            <ImageView
+                android:id="@+id/iv_guide_arrow_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_arrow_down_dashed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_guide_touch_hint" />
+
+            <!-- 하단 페이지 이동 안내 텍스트 -->
+            <TextView
+                android:id="@+id/tv_guide_page_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="120dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="이전 / 다음 페이지로\n이동할 수 있어요"
+                android:textColor="#C383E1"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 왼쪽 화살표 -->
+            <ImageView
+                android:id="@+id/iv_guide_arrow_left"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_arrow_left_dashed"
+                app:layout_constraintBottom_toBottomOf="@id/tv_guide_page_hint"
+                app:layout_constraintEnd_toStartOf="@id/tv_guide_page_hint"
+                app:layout_constraintTop_toTopOf="@id/tv_guide_page_hint" />
+
+            <!-- 오른쪽 화살표 -->
+            <ImageView
+                android:id="@+id/iv_guide_arrow_right"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_arrow_right_dashed"
+                app:layout_constraintBottom_toBottomOf="@id/tv_guide_page_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_guide_page_hint"
+                app:layout_constraintTop_toTopOf="@id/tv_guide_page_hint" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

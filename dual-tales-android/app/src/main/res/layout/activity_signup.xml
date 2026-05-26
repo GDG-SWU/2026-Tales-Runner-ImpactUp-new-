@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="800dp">
+
+        <!-- 상단 툴바 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back"
+                android:contentDescription="뒤로가기"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입"
+                android:textSize="18sp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="#1A1A1A"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 닉네임 그룹 -->
+        <LinearLayout
+            android:id="@+id/ll_nickname_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="98dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="닉네임"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="#2F2F2F"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <EditText
+                android:id="@+id/et_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="닉네임을 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <!-- 이메일 그룹 -->
+        <LinearLayout
+            android:id="@+id/ll_email_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_nickname_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="이메일"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="#2F2F2F"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="이메일을 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:inputType="textEmailAddress" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tv_email_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_email_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:background="@drawable/bg_button_black"
+                    android:text="이메일확인"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:backgroundTint="@null"
+                    android:stateListAnimator="@null" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 비밀번호 그룹 -->
+        <LinearLayout
+            android:id="@+id/ll_password_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_email_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="비밀번호"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="#2F2F2F"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="비밀번호를 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <!-- 비밀번호확인 그룹 -->
+        <LinearLayout
+            android:id="@+id/ll_password_confirm_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_password_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="비밀번호확인"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="#2F2F2F"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <EditText
+                android:id="@+id/et_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="동일한 비밀번호를 한번 더 입력해주세요."
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tv_password_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호가 일치하지 않아요!"
+                android:textSize="13sp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textColor="#FF5252"
+                android:layout_marginTop="6dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- 회원가입 완료 버튼 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_signup_complete"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_button_gray_disabled"
+            android:text="회원가입 완료"
+            android:textSize="18sp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textColor="#FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:backgroundTint="@null"
+            android:stateListAnimator="@null"
+            android:letterSpacing="-0.03"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_password_confirm_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

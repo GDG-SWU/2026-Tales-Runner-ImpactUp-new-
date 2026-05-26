@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- 스텝 인디케이터: onboarding1과 동일한 위치 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <!-- ======= 스텝 인디케이터 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/guide_indicator"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="19dp">
+
+        <!-- 원 1 (미완료): 10×10dp -->
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_step_inactive"
+            android:contentDescription="@null"
+            android:layout_marginTop="3dp" />
+
+        <!-- 원 2 (현재 활성): 17×17dp -->
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/ic_step_active"
+            android:contentDescription="@null"
+            android:layout_marginStart="10dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 본문 텍스트 ======= -->
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="동화 제작에 사용할\n언어를 1개 이상 선택해주세요."
+        android:textColor="#1A1A1A"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="20sp"
+        android:lineSpacingExtra="6sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_indicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ======= 언어 선택 1 라벨 ======= -->
+    <TextView
+        android:id="@+id/tv_label1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="언어 선택 1"
+        android:textColor="#1A1A1A"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textSize="14sp"
+        android:letterSpacing="-0.03"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 언어 선택 1 박스 -->
+    <LinearLayout
+        android:id="@+id/ll_lang1_selector"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_input_field"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_label1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_lang1_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="언어를 선택해주세요"
+            android:textColor="#9E9E9E"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+    <!-- ======= 언어 선택 2 라벨 ======= -->
+    <TextView
+        android:id="@+id/tv_label2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="언어 선택 2"
+        android:textColor="#1A1A1A"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textSize="14sp"
+        android:letterSpacing="-0.03"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_lang1_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 언어 선택 2 박스 -->
+    <LinearLayout
+        android:id="@+id/ll_lang2_selector"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_input_field"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_label2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_lang2_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="언어를 선택해주세요"
+            android:textColor="#9E9E9E"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+    <!-- ======= 선택 완료 버튼 ======= -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_complete"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="선택 완료"
+        android:background="@drawable/bg_button_disabled"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="16sp"
+        android:letterSpacing="-0.03"
+        android:textAllCaps="false"
+        android:stateListAnimator="@null"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

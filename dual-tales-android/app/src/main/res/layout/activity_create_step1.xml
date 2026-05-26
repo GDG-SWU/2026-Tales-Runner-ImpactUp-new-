@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <!-- ======= Horizontal Guidelines ======= -->
+
+    <!-- 툴바 시작: 46÷852 = 0.054 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.054" />
+
+    <!-- 스텝 인디케이터: 121÷852 = 0.142 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.142" />
+
+    <!-- 타이틀: 154÷852 = 0.181 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.181" />
+
+    <!-- 입력 폼: 278÷852 = 0.326 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.326" />
+
+    <!-- 하단 버튼: 690÷852 = 0.810 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.810" />
+
+    <!-- ======= Vertical Guidelines ======= -->
+
+    <!-- 왼쪽 여백: 18÷393 = 0.046 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.046" />
+
+    <!-- 오른쪽 여백: 375÷393 = 0.954 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.954" />
+
+    <!-- ======= 상단 툴바 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            android:scaleType="fitCenter"
+            android:contentDescription="뒤로 가기" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동화 만들기"
+            android:textColor="#000000"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="20sp"
+            android:lineHeight="28sp"
+            android:letterSpacing="-0.04"
+            android:layout_marginStart="20dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 스텝 인디케이터 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/guide_indicator"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="19dp">
+
+        <!-- 원 1 (현재): 17×17dp -->
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/ic_step_active"
+            android:contentDescription="@null" />
+
+        <!-- 원 2, 3, 4 (미완료): 10×10dp, top margin 3dp -->
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_step_inactive"
+            android:contentDescription="@null"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_step_inactive"
+            android:contentDescription="@null"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_step_inactive"
+            android:contentDescription="@null"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp" />
+
+    </LinearLayout>
+
+    <!-- ======= 타이틀 ======= -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="동화만들기의 첫 단계!\n언어와 나이를 선택해주세요."
+        android:textColor="#151515"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textSize="20sp"
+        android:lineSpacingExtra="8sp"
+        android:letterSpacing="-0.05"
+        app:layout_constraintTop_toBottomOf="@id/guide_title"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintEnd_toStartOf="@id/guide_right" />
+
+    <!-- ======= 입력 폼 카드 영역 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/guide_form"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintEnd_toStartOf="@id/guide_right">
+
+        <!-- 함께 읽을 언어 선택 섹션 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="함께 읽을 언어 선택"
+                android:textColor="#2F2F2F"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textSize="18sp"
+                android:lineSpacingExtra="4sp"
+                android:letterSpacing="-0.03"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_search"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_input_field"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <EditText
+                    android:id="@+id/et_language"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="언어를 검색해 선택하세요!"
+                    android:textColorHint="#848484"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textSize="16sp"
+                    android:letterSpacing="-0.03"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:focusable="false"
+                    android:clickable="true" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    android:contentDescription="언어 검색"
+                    app:tint="#848484" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 읽는 아이의 나이 섹션 (gap 16dp) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="읽는 아이의 나이"
+                android:textColor="#2F2F2F"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textSize="18sp"
+                android:lineSpacingExtra="4sp"
+                android:letterSpacing="-0.03"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_age"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_3_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="3~5세"
+                    android:background="@drawable/bg_age_unselected"
+                    android:textColor="#2F2F2F"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_6_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="6~8세"
+                    android:background="@drawable/bg_age_unselected"
+                    android:textColor="#2F2F2F"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null"
+                    android:layout_marginStart="12dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_age_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="그 외"
+                    android:background="@drawable/bg_age_unselected"
+                    android:textColor="#2F2F2F"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ======= 하단 버튼 영역 ======= -->
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/guide_bottom"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintEnd_toStartOf="@id/guide_right">
+
+        <TextView
+            android:id="@+id/tv_temp_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="임시저장"
+            android:gravity="center"
+            android:textColor="#848484"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_button_black"
+            android:fontFamily="@font/pretendard_semibold"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="4sp"
+            android:stateListAnimator="@null"
+            android:text="다음"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

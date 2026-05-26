@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_bookshelf"
+        android:title="내 책장"
+        android:icon="@drawable/ic_bookshelf" />
+
+    <item
+        android:id="@+id/nav_create"
+        android:title="만들기"
+        android:icon="@drawable/ic_create" />
+
+    <item
+        android:id="@+id/nav_search"
+        android:title="검색"
+        android:icon="@drawable/ic_search" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="프로필"
+        android:icon="@drawable/ic_profile" />
+
+</menu>
