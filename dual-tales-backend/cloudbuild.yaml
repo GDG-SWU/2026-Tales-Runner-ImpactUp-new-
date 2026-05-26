@@ -1,0 +1,40 @@
+steps:
+  # 구글클라우드 환경에서 Gradle을 이용해 자동으로 JAR 빌드 수행
+  - name: 'gradle:8.14-jdk17'
+    args: ['gradle', 'clean', 'bootJar']
+
+  # Dockerfile을 읽어서 도커 이미지 빌드
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/dual-tales-repo/dual-tales-backend:latest'
+      - '.'
+
+  # 구글 Artifact Registry(저장소)에 이미지 푸시
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/dual-tales-repo/dual-tales-backend:latest'
+
+ # Cloud Run에 배포 및 보안 비밀(Secret) 결합
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'dual-tales-service'
+      - '--image'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/dual-tales-repo/dual-tales-backend:latest'
+      - '--region'
+      - 'asia-northeast3'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+      # 내 환경변수 및 시크릿 연동 매핑
+      # 명령어 실행시 구글 Secret Manager에 GEMINI_API_KEY가 등록되어있어야함
+      - '--set-secrets'
+      - 'DB_HOST=DB_HOST:latest,DB_PORT=DB_PORT:latest,DB_NAME=DB_NAME:latest,DB_USERNAME=DB_USERNAME:latest,DB_PASSWORD=DB_PASSWORD:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
