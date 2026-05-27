@@ -66,13 +66,3 @@ Spring Boot 프레임워크를 중심으로 동화 생성 엔진인 Python FastA
 | **GET** | `/api/stories` | 유저가 생성 완료한 동화책 전체 목록 조회 | `200 OK` |
 | **GET** | `/api/stories/{id}` | 특정 동화책 상세 조회 (이중언어 본문 및 AI 삽화 포함) | `200 OK` |
 | **POST** | `/api/stories` | 외부 및 테스트용 동화책 직접 수동 생성 수신 | `201 Created` |
-
----
-
-## 🛠 Troubleshooting Experience
-
-* **문제 상황:** 타 서버(FastAPI) 연동 중 데이터 전송 규격 미스매치로 인해 원격 서버 단에서 `400 Bad Request` 및 `422 Unprocessable Entity` 지속 발생
-* **원인 분석:** 1. 외부 API 스키마 검증 시 문자열 대소문자 오타 오인 (`QUESTiON` 미스매치)
-2. 파이썬 Pydantic 엔진의 엄격한 데이터 딕셔너리 검증 과정에서 빈 `HashMap` 데이터 구조 충돌 현상 발견
-* **해결 방안:** - 요청 타입 필드의 상수를 대문자 정격 규격(`QUESTION`, `STORY`)으로 리팩토링 진행.
-* 컨텍스트 상태가 없는 최초 적재 시점 및 복원 실패 시점에 명시적으로 빈 객체 대신 `null` 주입 방식을 채택하여 API 데이터 바인딩 오류를 우회하고 통신 신뢰도를 100%로 끌어올림.
