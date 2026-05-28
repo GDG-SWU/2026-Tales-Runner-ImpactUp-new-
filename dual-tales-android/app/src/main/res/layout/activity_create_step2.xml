@@ -134,9 +134,10 @@
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/guide_content"
+        app:layout_constraintBottom_toTopOf="@id/ll_bottom"
         app:layout_constraintStart_toEndOf="@id/guide_left"
         app:layout_constraintEnd_toStartOf="@id/guide_right">
 
@@ -146,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_question_green"
+            android:background="@drawable/bg_question_purple"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
             android:paddingStart="20dp"
@@ -158,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="질문 1"
-                android:textColor="@color/sub_green"
+                android:textColor="@color/main_purple"
                 android:fontFamily="@font/pretendard_semibold"
                 android:textSize="14sp"
                 android:gravity="center" />
@@ -194,7 +195,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="주인공과 그 주변인물을 함께 적으면 더 좋아요!\n토끼, 사자, 옆집 친구, 돌멩이, 강아지, 고양이 등등 모든 것이 될 수 있어요!"
+                android:hint="답변을 입력해주세요."
                 android:textColorHint="@color/gray06"
                 android:fontFamily="@font/pretendard_medium"
                 android:textSize="16sp"

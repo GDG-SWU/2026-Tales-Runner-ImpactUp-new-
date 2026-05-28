@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dualtales.databinding.ActivityMainBinding
-import com.example.dualtales.ui.fragments.BookshelfFragment
-import com.example.dualtales.ui.fragments.SearchFragment
+import com.example.dualtales.ui.screens.BookshelfFragment
+import com.example.dualtales.ui.screens.SearchFragment
 import com.example.dualtales.ui.screens.CreateFragment
 import com.example.dualtales.ui.screens.ProfileFragment
 

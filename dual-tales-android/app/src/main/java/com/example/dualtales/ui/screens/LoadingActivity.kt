@@ -4,28 +4,36 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.dualtales.MainActivity
 import com.example.dualtales.R
 import com.example.dualtales.databinding.ActivityLoadingBinding
+import com.example.dualtales.network.RetrofitClient
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoadingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoadingBinding
+    private var draftId = 0L
+    private var isPolling = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        draftId = intent.getLongExtra("draft_id", 0L)
+
         setupVideo()
         setupButton()
-        startFakeLoading() // TODO: AI 연동 시 실제 API 응답으로 교체
+        startPolling()
     }
 
     private fun setupVideo() {
-        val videoUri = Uri.parse(
-            "android.resource://${packageName}/${R.raw.loading_character}"
-        )
+        val videoUri = Uri.parse("android.resource://${packageName}/${R.raw.loading_character}")
         binding.vvLoading.setVideoURI(videoUri)
         binding.vvLoading.setOnPreparedListener { mp ->
             mp.isLooping = true
@@ -34,61 +42,76 @@ class LoadingActivity : AppCompatActivity() {
     }
 
     private fun setupButton() {
-        // 초기 비활성화 상태
         binding.btnRead.isEnabled = false
         binding.btnRead.setBackgroundResource(R.drawable.bg_button_gray)
+    }
 
-        binding.btnRead.setOnClickListener {
-            // 더미 데이터로 ReadingActivity 이동
-            val intent = Intent(this, ReadingActivity::class.java).apply {
-                putExtra("story_id", -1L) // 더미용
-                putExtra("book_title", "모모와 노란 공의 풍덩!")
-                putExtra("use_dummy", true)
+    private fun startPolling() {
+        lifecycleScope.launch {
+            var attempts = 0
+            val maxAttempts = 20  // 최대 20번 (5초 간격 × 20 = 최대 100초 대기)
+
+            while (isPolling && attempts < maxAttempts) {
+                android.util.Log.d("LOADING", "polling start, draftId=$draftId")
+                delay(5000L)  // 5초 대기
+                attempts++
+                android.util.Log.d("LOADING", "polling attempt $attempts")
+
+                try {
+                    val response = RetrofitClient.api.getMyStories()
+                    android.util.Log.d("LOADING", "code=${response.code()}, size=${response.body()?.size}")
+
+                    if (response.isSuccessful && !response.body().isNullOrEmpty()) {
+                        val latestStory = response.body()!!.first()
+                        android.util.Log.d("LOADING", "storyId=${latestStory.id}, title=${latestStory.title}")
+                        isPolling = false
+                        onLoadingComplete(latestStory.id, latestStory.title)
+                        return@launch
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("LOADING", "polling error: ${e.message}")
+                }
             }
-            startActivity(intent)
+
+            // 최대 시도 초과 시
+            if (isPolling) {
+                Toast.makeText(this@LoadingActivity, "동화 생성에 시간이 걸리고 있어요. 책장에서 확인해주세요!", Toast.LENGTH_LONG).show()
+                onLoadingComplete(0L, "")
+            }
         }
     }
 
-    private fun startFakeLoading() {
-        // TODO: AI/백엔드 연동 시 이 부분을 실제 API 완료 콜백으로 교체
-        // 현재는 3초 후 완료 상태로 전환 (테스트용)
-        binding.root.postDelayed({
-            onLoadingComplete()
-        }, 3000L)
-    }
-
-    private fun onLoadingComplete() {
-        // 로딩 상태 전부 숨기기
+    private fun onLoadingComplete(storyId: Long, title: String) {
         binding.vvLoading.stopPlayback()
         binding.vvLoading.visibility = View.GONE
         binding.tvTitle.visibility = View.GONE
         binding.tvSubtitle.visibility = View.GONE
-
-        // 완료 뷰(아이콘 + 텍스트) 표시
         binding.llComplete.visibility = View.VISIBLE
-
-        // 버튼 활성화
         binding.btnRead.isEnabled = true
         binding.btnRead.backgroundTintList = null
         binding.btnRead.setBackgroundResource(R.drawable.bg_button_purple)
 
-        // 페이드인 애니메이션
         binding.llComplete.alpha = 0f
-        binding.llComplete.animate()
-            .alpha(1f)
-            .setDuration(400)
-            .start()
-
+        binding.llComplete.animate().alpha(1f).setDuration(400).start()
         binding.btnRead.alpha = 0f
-        binding.btnRead.animate()
-            .alpha(1f)
-            .setDuration(400)
-            .setStartDelay(200)
-            .start()
+        binding.btnRead.animate().alpha(1f).setDuration(400).setStartDelay(200).start()
+
+        binding.btnRead.setOnClickListener {
+            if (storyId != 0L) {
+                startActivity(Intent(this, ReadingActivity::class.java).apply {
+                    putExtra("story_id", storyId)
+                    putExtra("book_title", title)
+                })
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            finish()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        isPolling = false
         binding.vvLoading.stopPlayback()
     }
 }

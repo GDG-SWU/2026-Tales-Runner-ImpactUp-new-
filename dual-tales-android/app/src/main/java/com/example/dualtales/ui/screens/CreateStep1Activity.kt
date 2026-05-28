@@ -112,7 +112,6 @@ class CreateStep1Activity : AppCompatActivity() {
                         putExtra("question_ko", draft.question_ko)
                         putExtra("question_foreign", draft.question_foreign)
                         putExtra("current_step", draft.currentStep)
-                        putExtra("is_final", draft.isFinal)
                         putExtra("lang_code", selectedLangCode)
                         putExtra("target_age", selectedAge)
                     }
@@ -137,23 +136,12 @@ class CreateStep1Activity : AppCompatActivity() {
         binding.btnAgeOther.setOnClickListener { updateAgeSelection("그외") }
 
         binding.btnNext.setOnClickListener {
-            // TODO: 백엔드 연결 후 viewModel.startDraft()로 교체
-            // 더미 데이터로 Step2로 이동
-            val dummyQuestions = listOf(
-                Pair("안녕! 네가 제일 좋아하는 친구는 누구야?", "ねえ、一番好きな友達は誰かな？"),
-                Pair("모모는 다른 강아지들이랑 뭐가 다를까?", "モモは他のワンちゃんと何が違うかな？"),
-                Pair("우리 모모는 무엇을 할 때 제일 신나고 재미있어 할까?", "ももちゃんは、どんなことをしている時が一番ワクワクして楽しいかな？")
-            )
-            val intent = Intent(this, CreateStep2Activity::class.java).apply {
-                putExtra("draft_id", 1L)
-                putExtra("question_ko", dummyQuestions[0].first)
-                putExtra("question_foreign", dummyQuestions[0].second)
-                putExtra("current_step", 1)
-                putExtra("is_final", false)
-                putExtra("lang_code", selectedLangCode)
-                putExtra("target_age", selectedAge)
+            val lang = binding.etLanguage.text.toString().trim()
+            if (lang.isEmpty()) {
+                Toast.makeText(this, "학습 언어를 선택해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-            startActivity(intent)
+            viewModel.startDraft(selectedLangCode, selectedAge)
         }
 
         binding.tvTempSave.setOnClickListener {

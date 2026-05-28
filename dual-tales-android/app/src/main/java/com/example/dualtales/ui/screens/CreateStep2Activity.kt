@@ -78,6 +78,9 @@ class CreateStep2Activity : AppCompatActivity() {
         binding.tvQuestionText.text = questionKo
         // 외국어 질문은 추후 별도 뷰 추가 시 연결
 
+        val currentStep = intent.getIntExtra("current_step", 1)
+        binding.tvQuestionLabel.text = "질문 ${currentStep}"
+
         observeViewModel()
         setupClickListeners()
     }
@@ -91,18 +94,21 @@ class CreateStep2Activity : AppCompatActivity() {
                 }
                 is CreateStep2ViewModel.AnswerState.Success -> {
                     val next = state.response
-                    val intent = Intent(this, CreateStep3Activity::class.java).apply {
-                        putExtra("draft_id", draftId)
-                        putExtra("question_ko", next.question_ko)
-                        putExtra("question_foreign", next.question_foreign)
-                        putExtra("current_step", next.currentStep)
-                        putExtra("is_final", next.isFinal)
-                        putExtra("lang_code", langCode)
-                        putExtra("target_age", targetAge)
-                    }
-                    startActivity(intent)
                     binding.btnNext.isEnabled = true
                     binding.btnNext.text = "다음"
+                    binding.etAnswer.setText("")
+
+                    if (next.isFinal) {
+                        val intent = Intent(this, LoadingActivity::class.java).apply {
+                            putExtra("draft_id", draftId)
+                        }
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        binding.tvQuestionText.text = next.question_ko
+                        binding.tvQuestionLabel.text = "질문 ${next.currentStep}"
+                        binding.etAnswer.setText("")
+                    }
                 }
                 is CreateStep2ViewModel.AnswerState.Error -> {
                     binding.btnNext.isEnabled = true
@@ -121,9 +127,9 @@ class CreateStep2Activity : AppCompatActivity() {
             startActivityForResult(
                 Intent(this, VoiceInputActivity::class.java).apply {
                     putExtra("step_number", 2)
-                    putExtra("question_label", "질문 1")
+                    putExtra("question_label", binding.tvQuestionLabel.text.toString())
                     putExtra("question_text", binding.tvQuestionText.text.toString())
-                    putExtra("question_bg_res", R.drawable.bg_question_green)
+                    putExtra("question_bg_res", R.drawable.bg_question_purple)
                 },
                 REQUEST_VOICE_INPUT
             )
@@ -135,17 +141,7 @@ class CreateStep2Activity : AppCompatActivity() {
                 Toast.makeText(this, "답변을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // TODO: 백엔드 연결 후 viewModel.sendAnswer()로 교체
-            val intent = Intent(this, CreateStep3Activity::class.java).apply {
-                putExtra("draft_id", draftId)
-                putExtra("question_ko", "모모가 제일 좋아하는 공원에서 신나게 뛰어놀고 싶은데, 어디가 좋을까?")
-                putExtra("question_foreign", "モモが一番好きな公園で楽しく駆け回りたいんだけど、どこに行くと一番いいかな？")
-                putExtra("current_step", 2)
-                putExtra("is_final", false)
-                putExtra("lang_code", langCode)
-                putExtra("target_age", targetAge)
-            }
-            startActivity(intent)
+            viewModel.sendAnswer(draftId, answer)
         }
 
         binding.tvTempSave.setOnClickListener {

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="323dp">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="307dp"
@@ -11,24 +11,21 @@
         android:layout_gravity="center"
         app:cardCornerRadius="30dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/transparent">
+        app:cardBackgroundColor="#D4B8E8">
 
-        <!-- 책 커버 이미지 -->
         <ImageView
             android:id="@+id/iv_book_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:background="@android:color/transparent" />
+            android:contentDescription="@null" />
 
-        <!-- 하단 그라데이션 오버레이 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="bottom"
             android:background="@drawable/bg_gradient_bottom" />
 
-        <!-- 페이지 배지 (좌상단) -->
         <TextView
             android:id="@+id/tv_page_badge"
             android:layout_width="76dp"
@@ -45,7 +42,6 @@
             android:textColor="#C383E1"
             android:gravity="center" />
 
-        <!-- 이어 읽기 버튼 (하단 중앙) -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_continue_reading"
             android:layout_width="wrap_content"

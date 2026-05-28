@@ -133,17 +133,7 @@ class CreateStep3Activity : AppCompatActivity() {
                 Toast.makeText(this, "답변을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // TODO: 백엔드 연결 후 viewModel.sendAnswer()로 교체
-            val intent = Intent(this, CreateStep4Activity::class.java).apply {
-                putExtra("draft_id", draftId)
-                putExtra("question_ko", "모모가 무지개 공원에서 제일 좋아하는 반짝반짝 빛나는 노란 공으로 신나게 놀고 있었는데, 갑자기 무슨 일이 일어났을까?")
-                putExtra("question_foreign", "モモが虹の公園で一番好きなキラキラ光る黄色いボールで楽しく遊んでいたんだけど、突然何が起こったかな？")
-                putExtra("current_step", 3)
-                putExtra("is_final", true)
-                putExtra("lang_code", langCode)
-                putExtra("target_age", targetAge)
-            }
-            startActivity(intent)
+            viewModel.sendAnswer(draftId, answer)
         }
 
         binding.tvTempSave.setOnClickListener {

@@ -7,14 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.dualtales.databinding.FragmentProfileBinding
+import com.example.dualtales.network.RetrofitClient
 import com.example.dualtales.network.UserManager
-import com.example.dualtales.ui.screens.Onboarding2Activity
+import kotlinx.coroutines.launch
+
+class ProfileViewModel : ViewModel() {
+    val madeCount = MutableLiveData<Int>(0)
+
+    fun loadMadeCount() {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.api.getMyStories()
+                if (response.isSuccessful && response.body() != null) {
+                    madeCount.value = response.body()!!.size
+                }
+            } catch (e: Exception) {
+                // 실패 시 0 유지
+            }
+        }
+    }
+}
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,25 +51,17 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateProfile(
-            nickname = UserManager.getNickname().ifEmpty { "닉네임 없음" },
-            email = UserManager.getEmail().ifEmpty { "이메일 없음" },
-            madeCount = 0,  // TODO: 내 동화 목록 API 연결 후 업데이트
-            readCount = 0
-        )
+        binding.tvNickname.text = UserManager.getNickname().ifEmpty { "닉네임 없음" }
+        binding.tvEmail.text = UserManager.getEmail().ifEmpty { "이메일 없음" }
+        binding.tvMadeBooks.text = "만든 동화 책 0권"
+        binding.tvReadBooks.text = "읽은 책 0권"
 
+        viewModel.madeCount.observe(viewLifecycleOwner) { count ->
+            binding.tvMadeBooks.text = "만든 동화 책 ${count}권"
+        }
+
+        viewModel.loadMadeCount()
         setupClickListeners()
-    }
-
-    /**
-     * 프로필 정보를 업데이트합니다.
-     * 추후 실제 API 데이터 연동 시 이 함수를 호출합니다.
-     */
-    fun updateProfile(nickname: String, email: String, madeCount: Int, readCount: Int) {
-        binding.tvNickname.text = nickname
-        binding.tvEmail.text = email
-        binding.tvMadeBooks.text = "만든 동화 책 ${madeCount}권"
-        binding.tvReadBooks.text = "읽은 책 ${readCount}권"
     }
 
     private fun setupClickListeners() {
@@ -61,7 +76,6 @@ class ProfileFragment : Fragment() {
         binding.llAppSettings.setOnClickListener {
             Toast.makeText(requireContext(), "준비 중입니다", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun onDestroyView() {

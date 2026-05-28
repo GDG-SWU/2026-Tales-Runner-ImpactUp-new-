@@ -121,12 +121,7 @@ class CreateStep4Activity : AppCompatActivity() {
                 Toast.makeText(this, "답변을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // TODO: 백엔드 연결 후 viewModel.sendFinalAnswer()로 교체
-            val intent = Intent(this, LoadingActivity::class.java).apply {
-                putExtra("draft_id", draftId)
-            }
-            startActivity(intent)
-            finish()
+            viewModel.sendFinalAnswer(draftId, answer)
         }
 
         binding.tvTempSave.setOnClickListener {

@@ -11,16 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.viewpager2.widget.ViewPager2
 import com.example.dualtales.databinding.FragmentBookshelfBinding
 import com.example.dualtales.network.RetrofitClient
 import com.example.dualtales.network.dto.StoryResponseDto
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.example.dualtales.ui.adapters.BookCardAdapter
-import com.example.dualtales.databinding.ItemBookFeaturedBinding
 import kotlinx.coroutines.launch
-import com.example.dualtales.data.BookItem
 import com.example.dualtales.R
 
 class BookshelfViewModel : ViewModel() {
@@ -68,25 +63,72 @@ class BookshelfFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 닉네임 표시
         val nickname = com.example.dualtales.network.UserManager.getNickname()
         if (nickname.isNotEmpty()) {
             binding.tvGreeting.text = "${nickname} 님 안녕하세요.\n오늘은 어떤 동화를 읽어볼까요?"
         }
 
-        setupFeaturedPager()
         observeViewModel()
-        loadDummyBooks()
+        viewModel.loadMyStories()
     }
 
-    private fun setupFeaturedPager() {
-        val coverImages = listOf(
-            R.drawable.book_cover_1,
-            R.drawable.book_cover_2,
-            R.drawable.book_cover_3
-        )
+    private fun observeViewModel() {
+        viewModel.storiesState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is BookshelfViewModel.StoriesState.Loading -> {
+                    android.util.Log.d("BOOKSHELF", "loading...")
+                }
+                is BookshelfViewModel.StoriesState.Success -> {
+                    android.util.Log.d("BOOKSHELF", "stories size = ${state.stories.size}")
+                    setupFeaturedPager(state.stories)
+                    updateBookList(state.stories)
+                }
+                is BookshelfViewModel.StoriesState.Error -> {
+                    android.util.Log.d("BOOKSHELF", "error = ${state.message}")
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun setupFeaturedPager(stories: List<StoryResponseDto>) {
+        val adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+
+            inner class FeaturedViewHolder(val binding: com.example.dualtales.databinding.ItemBookFeaturedBinding) :
+                androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
+
+            override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+                return FeaturedViewHolder(
+                    com.example.dualtales.databinding.ItemBookFeaturedBinding.inflate(
+                        android.view.LayoutInflater.from(parent.context), parent, false
+                    )
+                )
+            }
+
+            override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+                val story = stories[position]
+                val vh = holder as FeaturedViewHolder
+                if (!story.coverImageUrl.isNullOrBlank()) {
+                    com.bumptech.glide.Glide.with(vh.binding.root.context)
+                        .load(story.coverImageUrl)
+                        .into(vh.binding.ivBookCover)
+                } else {
+                    vh.binding.ivBookCover.setImageResource(R.drawable.book_cover_1)
+                }
+                vh.binding.tvPageBadge.text = "1 / ${story.page_count}"
+                vh.binding.btnContinueReading.setOnClickListener {
+                    startActivity(Intent(requireContext(), ReadingActivity::class.java).apply {
+                        putExtra("story_id", story.id)
+                        putExtra("book_title", story.title)
+                    })
+                }
+            }
+
+            override fun getItemCount() = stories.size
+        }
+
         binding.viewPagerFeatured.apply {
-            adapter = FeaturedAdapter(coverImages)
+            this.adapter = adapter
             offscreenPageLimit = 1
             clipToPadding = false
             clipChildren = false
@@ -94,145 +136,59 @@ class BookshelfFragment : Fragment() {
         }
     }
 
-    inner class FeaturedAdapter(
-        private val coverImages: List<Int>
-    ) : RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
-
-        inner class ViewHolder(val binding: ItemBookFeaturedBinding) :
-            RecyclerView.ViewHolder(binding.root) {
-
-            fun bind(resId: Int) {
-                binding.ivBookCover.setImageResource(resId)
-                binding.ivBookCover.setBackgroundColor(android.graphics.Color.TRANSPARENT)
-                binding.tvPageBadge.text = "4 / 16"
-                binding.btnContinueReading.setOnClickListener {
-                    startActivity(Intent(requireContext(), ReadingActivity::class.java).apply {
-                        putExtra("story_id", -1L)
-                        putExtra("use_dummy", true)
-                    })
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(ItemBookFeaturedBinding.inflate(layoutInflater, parent, false))
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-            holder.bind(coverImages[position])
-
-        override fun getItemCount() = coverImages.size
-    }
-
-    private fun observeViewModel() {
-        viewModel.storiesState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is BookshelfViewModel.StoriesState.Loading -> {
-                    // 로딩 중 처리 (필요 시 ProgressBar 표시)
-                }
-                is BookshelfViewModel.StoriesState.Success -> {
-                    updateBookList(state.stories)
-                }
-                is BookshelfViewModel.StoriesState.Error -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
     private fun updateBookList(stories: List<StoryResponseDto>) {
-        val bookItems = stories.map { story ->
-            BookItem(
-                id = story.id.toString(),
-                title = story.title,
-                coverImageUrl = story.coverImageUrl ?: "",
-                language = story.targetLangCode,
-                totalPages = story.page_count,
-                createdAt = story.createdAt
-            )
-        }
-
-        binding.llBookGrid.removeAllViews()
-        bookItems.forEach { bookItem ->
-            val itemView = layoutInflater.inflate(
-                com.example.dualtales.R.layout.item_book_card,
-                binding.llBookGrid,
-                false
-            )
-            itemView.setOnClickListener {
-                val intent = Intent(requireContext(), ReadingActivity::class.java).apply {
-                    putExtra("story_id", bookItem.id.toLong())
-                    putExtra("book_title", bookItem.title)
-                }
-                startActivity(intent)
-            }
-            binding.llBookGrid.addView(itemView)
-        }
-    }
-
-    private fun loadDummyBooks() {
-        // 1. R.drawable 리소스 ID 방식으로 6개 이미지 준비 (가장 안전함)
-        val coverImages = listOf(
-            R.drawable.book_cover_1,
-            R.drawable.book_cover_2,
-            R.drawable.book_cover_3,
-            R.drawable.book_cover_4,
-            R.drawable.book_cover_5,
-            R.drawable.book_cover_6
-        )
-
-        val titles = listOf(
-            "모모와 노란 공의 풍덩!", "동화책 2",
-            "동화책 3", "동화책 4",
-            "동화책 5", "동화책 6"
-        )
-
         binding.llBookGrid.removeAllViews()
 
-        // 2. 2개씩 한 쌍으로 총 3줄 만들기
-        for (i in coverImages.indices step 2) {
+        if (stories.isEmpty()) {
+            // 빈 상태 처리 — 필요 시 empty view 표시
+            return
+        }
 
-            // attachToRoot = false 설정으로 방금 XML에 넣은 marginBottom 49dp를 살립니다.
-            val rowView = layoutInflater.inflate(
-                R.layout.item_book_row,
-                binding.llBookGrid,
-                false
-            )
-
-            val card1 = rowView.findViewById<androidx.cardview.widget.CardView>(R.id.card_book1)
-            val card2 = rowView.findViewById<androidx.cardview.widget.CardView>(R.id.card_book2)
+        val pairs = stories.chunked(2)
+        pairs.forEach { pair ->
+            val rowView = layoutInflater.inflate(R.layout.item_book_row, binding.llBookGrid, false)
             val iv1 = rowView.findViewById<android.widget.ImageView>(R.id.iv_book1)
             val iv2 = rowView.findViewById<android.widget.ImageView>(R.id.iv_book2)
+            val card1 = rowView.findViewById<androidx.cardview.widget.CardView>(R.id.card_book1)
+            val card2 = rowView.findViewById<androidx.cardview.widget.CardView>(R.id.card_book2)
 
-            // 첫 번째 책 세팅
-            iv1?.setImageResource(coverImages[i])
-            iv1?.setBackgroundColor(android.graphics.Color.TRANSPARENT) // 회색 배경 가리기
-
-            card1?.setOnClickListener {
-                if (i == 0) {
-                    startActivity(Intent(requireContext(), ReadingActivity::class.java).apply {
-                        putExtra("story_id", -1L)
-                        putExtra("book_title", titles[i])
-                        putExtra("use_dummy", true)
-                    })
-                } else {
-                    Toast.makeText(requireContext(), "준비 중입니다", Toast.LENGTH_SHORT).show()
-                }
+            val story1 = pair[0]
+            if (!story1.coverImageUrl.isNullOrBlank()) {
+                com.bumptech.glide.Glide.with(this).load(story1.coverImageUrl).into(iv1)
+            } else {
+                iv1.setImageResource(R.drawable.book_cover_1)
+            }
+            card1.setOnClickListener {
+                startActivity(Intent(requireContext(), ReadingActivity::class.java).apply {
+                    putExtra("story_id", story1.id)
+                    putExtra("book_title", story1.title)
+                })
             }
 
-            // 두 번째 책 세팅
-            if (i + 1 < coverImages.size) {
-                iv2?.setImageResource(coverImages[i + 1])
-                iv2?.setBackgroundColor(android.graphics.Color.TRANSPARENT) // 회색 배경 가리기
-
-                card2?.setOnClickListener {
-                    Toast.makeText(requireContext(), "준비 중입니다", Toast.LENGTH_SHORT).show()
+            if (pair.size > 1) {
+                val story2 = pair[1]
+                if (!story2.coverImageUrl.isNullOrBlank()) {
+                    com.bumptech.glide.Glide.with(this).load(story2.coverImageUrl).into(iv2)
+                } else {
+                    iv2.setImageResource(R.drawable.book_cover_2)
+                }
+                card2.setOnClickListener {
+                    startActivity(Intent(requireContext(), ReadingActivity::class.java).apply {
+                        putExtra("story_id", story2.id)
+                        putExtra("book_title", story2.title)
+                    })
                 }
             } else {
-                card2?.visibility = View.INVISIBLE
+                card2.visibility = android.view.View.INVISIBLE
             }
 
             binding.llBookGrid.addView(rowView)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadMyStories()
     }
 
     override fun onDestroyView() {

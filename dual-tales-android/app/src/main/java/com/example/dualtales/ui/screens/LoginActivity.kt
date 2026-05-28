@@ -26,6 +26,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        // TODO: 임시 - 로그인 스킵 (백엔드 점검 중). 나중에 아래 블록 제거 필요
+//        startActivity(Intent(this, MainActivity::class.java))
+//        finish()
+//        return
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

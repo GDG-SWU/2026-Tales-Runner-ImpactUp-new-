@@ -153,6 +153,64 @@
 
     </LinearLayout>
 
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#F5F5F5" />
+
+    <!-- 제목 변경 -->
+    <LinearLayout
+        android:id="@+id/ll_change_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_item_divider"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pretendard_medium"
+            android:letterSpacing="-0.03"
+            android:text="제목 변경"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:scaleX="-1"
+            android:src="@drawable/ic_back"
+            app:tint="#C2C2C2" />
+
+    </LinearLayout>
+
+    <!-- 동화 삭제 -->
+    <LinearLayout
+        android:id="@+id/ll_delete_story"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pretendard_medium"
+            android:letterSpacing="-0.03"
+            android:text="동화 삭제"
+            android:textColor="#FF4444"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
     <!-- 나머지 영역 채우기 -->
     <View
         android:layout_width="match_parent"

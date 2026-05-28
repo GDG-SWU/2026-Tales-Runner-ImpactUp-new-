@@ -1,6 +1,8 @@
 package com.example.dualtales.network.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class StoryDraftCreateRequest(
-    val targetLangCode: String,
-    val targetAge: Int
+    @SerializedName("target_lang_code") val targetLangCode: String,
+    @SerializedName("target_age") val targetAge: Int
 )

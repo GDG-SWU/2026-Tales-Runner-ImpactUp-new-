@@ -10,12 +10,16 @@ object RetrofitClient {
 
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-        .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+        .readTimeout(2000, java.util.concurrent.TimeUnit.SECONDS)
         .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
         .addInterceptor { chain ->
             val token = TokenManager.getToken()
             val request = chain.request().newBuilder()
-                .apply { if (!token.isNullOrEmpty()) addHeader("x-access-token", token) }
+                .apply {
+                    if (!token.isNullOrEmpty()) {
+                        addHeader("Authorization", "Bearer $token")
+                    }
+                }
                 .build()
             chain.proceed(request)
         }

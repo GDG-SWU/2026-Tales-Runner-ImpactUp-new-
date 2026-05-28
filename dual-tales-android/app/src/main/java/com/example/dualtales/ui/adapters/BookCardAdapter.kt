@@ -16,13 +16,15 @@ class BookCardAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: BookItem) {
-            when (item.id) {
-                "1" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_1)
-                "2" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_2)
-                "3" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_3)
-                "4" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_4)
-                "5" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_5)
-                "6" -> binding.ivBookCover.setImageResource(R.drawable.book_cover_6)
+            android.util.Log.d("ADAPTER", "id=${item.id}, coverImageUrl=${item.coverImageUrl}")
+            if (!item.coverImageUrl.isNullOrBlank()) {
+                com.bumptech.glide.Glide.with(binding.root.context)
+                    .load(item.coverImageUrl)
+                    .placeholder(R.drawable.book_cover_1)
+                    .error(R.drawable.book_cover_1)
+                    .into(binding.ivBookCover)
+            } else {
+                binding.ivBookCover.setImageResource(R.drawable.book_cover_1)
             }
             binding.root.setOnClickListener { onItemClick(item) }
         }
