@@ -79,8 +79,8 @@ class SearchFragment : Fragment() {
             selectedLangCode = "FR"
             viewModel.loadFeed(selectedLangCode)
         }
-        binding.btnLangKorean.setOnClickListener {
-            selectedLangCode = "KO"
+        binding.btnLangJapanese.setOnClickListener {
+            selectedLangCode = "JA"
             viewModel.loadFeed(selectedLangCode)
         }
     }

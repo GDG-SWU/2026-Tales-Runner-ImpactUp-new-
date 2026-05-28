@@ -92,7 +92,7 @@
                     app:backgroundTint="@null" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_lang_korean"
+                    android:id="@+id/btn_lang_japanese"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
@@ -103,7 +103,7 @@
                     android:letterSpacing="-0.03"
                     android:outlineProvider="background"
                     android:stateListAnimator="@null"
-                    android:text="한국어"
+                    android:text="일본어"
                     android:textAllCaps="false"
                     android:textColor="#1A1A1A"
                     android:textSize="16sp"
